@@ -22,7 +22,11 @@ class EquityCalculator:
     def __convert_board(self) -> np.ndarray:
         return np.array([CARD_INT_LOOKUP[card] for card in self.board], dtype=np.uint8)
 
-    def __get_enumerated_strengths(self):
+    def __get_enumerated_strengths(self) -> np.ndarray:
+        """Calculates player hand strengths on every possible final board, returning an NxM numpy array
+        containing hand strengths, where N is the number of players, and M is the number of iterations required
+        to enumerate all possible final boards.
+        """
         num_players = self.__int_hole_cards.shape[1]
         repeated_boards = np.repeat(self.__int_board, num_players).reshape(-1, num_players)
         hands = np.concatenate((self.__int_hole_cards, repeated_boards))
@@ -34,6 +38,9 @@ class EquityCalculator:
         return get_hand_strength(*hands, *boards)
 
     def __get_summary_statistics(self) -> dict:
+        """Summarises the information calculated by __get_enumerated_strengths(). Converts the raw hand
+        strength data to win %, lose %, etc.
+        """
         wins = np.equal(self.__strengths, self.__strengths.max(axis=1).reshape(-1, 1))
         evs = wins / wins.sum(axis=1).reshape(-1, 1)
         outright_wins = (evs == 1).sum(axis=0)

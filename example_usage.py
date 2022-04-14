@@ -1,4 +1,4 @@
-from calculations import EquityCalculator
+from calculations import EquityCalculator, CARDS
 
 
 def example():
@@ -12,6 +12,10 @@ def example():
 
 
 if __name__ == '__main__':
+    # View full list of valid cards
+    print(CARDS)
+
+    # Create example EquityCalculator object
     equities = example()
 
     # Print console-friendly summary:

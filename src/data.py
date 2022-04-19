@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
+DATA_PATH = os.path.join(os.path.dirname(__file__), '../data')
 HAND_RANKS_FILENAME = 'hand_ranks.npz'
 BOARDS_FILENAME = 'boards.npz'
 

@@ -2,6 +2,10 @@
 
 A Python library for calculating all-in equities in Texas Hold'em Poker hands.
 
+## Disclaimer
+
+The purpose of this library is to demonstrate the power of NumPy broadcasting, and how it can be used to avoid slow Python loops. The calculations performed are accurate and time-efficient, but not space-efficient. It is suitable for use in local data analysis workflows, but it has not been built with production in mind.
+
 ## Requirements
 
  - Python 3.9+
@@ -87,4 +91,4 @@ This is where [NumPy Broadcasting](https://numpy.org/doc/stable/user/basics.broa
 
 The exact steps to generate the appropriate input data can be seen in `EquityCalculator.__get_enumerated_strengths`, but ultimately what happens in this case is that arguments `c1` - `c5` are all 1-d arrays of length 2. `c1` will contain the first hole card of each player. `c2` will contain the second hole card of each player. `c3` will contain the first board card, repeated so that each player has their own personal copy (required for broadcasting to work correctly). The same applies for `c4` and `c5`. `c6` and `c7` are both 2-d arrays of shape 990x1. By combining the two different array shapes in our indexing, we end up with the desired 990x2 array, which can then be summarised to calculate the expected value of each hand (see `EquityCalculator.__get_summary_statistics`) for details.
 
-The same code works regardless of which array shapes are needed. For example, a three-player preflop hand would need 1-d arrays of length 3 for each of `c1` and `c2`. Then `c3` - `c7` would each be of shape 1,370,754 x 1. Clearly, this is not a particularly space-efficient way to perform these calculations, but assuming enough RAM is available, the speed-up over a Python loop solution is significant. For both speed and space efficiency, a looped solution using Numba or Cython would be preferable.
+The same code works regardless of which array shapes are needed. For example, a three-player preflop hand would need 1-d arrays of length 3 for each of `c1` and `c2`. Then `c3` - `c7` would each be of shape 1,370,754 x 1. Clearly, this is not a particularly space-efficient way to perform these calculations, but assuming enough RAM is available, the speed-up over a Python loop solution is significant. For both speed and space efficiency, a looped solution using Numba or Cython would be preferable. In addition, for preflop match-ups where 1M+ evaluations are required, caching the results for fast lookup would undoubtedly be preferable to any of the on-the-fly methods proposed here.

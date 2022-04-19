@@ -88,11 +88,11 @@ class EquityCalculator:
 
     def __repr__(self) -> str:
         enumerations = self.summary['Enumerations']
-        intro = f'Calculated equities from evaluated hand strengths on all {enumerations:,} possible final boards.'
+        intro = f'\nCalculated equities from evaluated hand strengths on all {enumerations:,} possible final boards.'
         if self.board:
             board = 'Board: ' + ' '.join(self.board) + '\n'
         else:
-            board = 'No board cards were dealt.\n'
+            board = 'Board: None.\n'
         pct_format = '{:.2%}'.format
         float_format = '{:.3f}'.format
         int_format = '{:,}'.format

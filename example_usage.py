@@ -1,3 +1,4 @@
+import random
 from calculations import EquityCalculator, CARDS
 
 
@@ -8,6 +9,16 @@ def example():
     hand_4 = ['9c', '8c']
     hole_cards = [hand_1, hand_2, hand_3, hand_4]  # Must be 2-10 hands in total
     board = ['Js', 'Tc', '2c']  # Board must have no more than 4 cards already dealt, can be empty
+    return EquityCalculator(hole_cards, board)
+
+
+def random_example():
+    deck = CARDS.copy()
+    random.shuffle(deck)
+    num_players = random.randint(2, 10)
+    num_board_cards = random.randint(0, 4)
+    board = [deck.pop() for _ in range(num_board_cards)]
+    hole_cards = [[deck.pop(), deck.pop()] for _ in range(num_players)]
     return EquityCalculator(hole_cards, board)
 
 
@@ -30,3 +41,6 @@ if __name__ == '__main__':
 
     # Or extract same data in dictionary format
     d = equities.summary
+
+    # A random example
+    print(random_example())

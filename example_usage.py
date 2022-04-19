@@ -12,6 +12,14 @@ def example():
     return EquityCalculator(hole_cards, board)
 
 
+def another_example():
+    hand_1 = ['Js', 'Ts']
+    hand_2 = ['2c', '2d']
+    hole_cards = [hand_1, hand_2]
+    board = ['9s', '8s', '3c']
+    return EquityCalculator(hole_cards, board)
+
+
 def random_example():
     deck = CARDS.copy()
     random.shuffle(deck)
@@ -42,5 +50,6 @@ if __name__ == '__main__':
     # Or extract same data in dictionary format
     d = equities.summary
 
-    # A random example
+    # Other examples
+    print(another_example())
     print(random_example())
